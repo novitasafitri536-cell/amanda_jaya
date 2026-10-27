@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover"/>
     <meta name="theme-color" content="#325346"/>
-    <title>Amanda Tisu Jaya - Web App</title>
+    <title>Amanda Tisu Jaya - Portal Agen</title>
 
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
 
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -40,7 +40,7 @@
                     fontFamily: { sans: ["Plus Jakarta Sans", "sans-serif"] }
                 }
             }
-        };
+        }
     </script>
     <style>
         @layer base {
@@ -61,17 +61,17 @@
 </head>
 <body class="bg-surface text-on-surface font-sans min-h-screen flex flex-col antialiased">
 
-    <!-- HEADER (Tampil jika sudah login) -->
+    <!-- GLOBAL HEADER (Tampil setelah login) -->
     <header id="mainHeader" class="fixed top-0 w-full z-40 pt-safe bg-surface/85 backdrop-blur-xl shadow-sm hidden">
         <div class="h-16 px-4 sm:px-8 max-w-7xl mx-auto flex items-center justify-between gap-4">
             <div class="flex items-center gap-3 min-w-0">
                 <img alt="Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNC-5oZzCNpQJZUTQVdmZRoEXKpa8xwwdOpOM5Ds546i-uPWsVF7GtqHUJs3jfkXimphMJ95qSWqbheATZQwC_saDEJSS3yFx0JEWY_eGXiCnmLaC__8QsXWBFHXVt-952waRdhGRO3KcEA8tnRnNVA1GOMqdGCQfgnxUbP1gupMIMwl27YopA0yNSm_sr7N55gfVjFMI34vgSQLYXQTD5SZqtlAISoU_Vsd8PeVQKyZi4t4JstZ1X"/>
                 <div class="flex flex-col min-w-0">
                     <span class="text-[10px] uppercase text-secondary tracking-wider font-bold truncate">Amanda Tisu Jaya</span>
-                    <span id="pageTitle" class="text-[18px] font-semibold text-on-surface truncate">Dashboard</span>
+                    <span id="headerTitle" class="text-[18px] font-semibold text-on-surface truncate">Dashboard</span>
                 </div>
             </div>
-            <button onclick="logout()" class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-error flex items-center gap-1">
+            <button onclick="logout()" class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-error flex items-center gap-1 cursor-pointer">
                 <span class="material-symbols-outlined text-[16px]">logout</span> Logout
             </button>
         </div>
@@ -89,7 +89,7 @@
             </div>
 
             <div class="relative z-10 w-full rounded-2xl bg-surface-container-lowest shadow-xl p-6 border border-surface-variant/30">
-                <form id="loginForm" onsubmit="handleLogin(event)" class="flex flex-col gap-4">
+                <form onsubmit="handleLogin(event)" class="flex flex-col gap-4">
                     <div class="flex flex-col gap-1.5">
                         <label class="text-xs font-semibold text-on-surface" for="agentId">Identitas Agen</label>
                         <input class="w-full h-11 px-3 rounded-xl bg-surface-container-low text-xs focus:outline-none" id="agentId" required placeholder="Masukkan Username" type="text"/>
@@ -98,7 +98,7 @@
                         <label class="text-xs font-semibold text-on-surface" for="agentPassword">Kata Sandi</label>
                         <input class="w-full h-11 px-3 rounded-xl bg-surface-container-low text-xs focus:outline-none" id="agentPassword" required placeholder="Masukkan Kata Sandi" type="password"/>
                     </div>
-                    <button class="w-full h-11 rounded-xl bg-primary text-on-primary font-semibold text-xs flex items-center justify-center gap-2 mt-2" type="submit">
+                    <button class="w-full h-11 rounded-xl bg-primary text-on-primary font-semibold text-xs flex items-center justify-center gap-2 mt-2 cursor-pointer" type="submit">
                         <span>Login</span>
                         <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                     </button>
@@ -130,17 +130,17 @@
         </div>
     </section>
 
-    <!-- 3. HALAMAN KATALOG PRODUK -->
+    <!-- 3. HALAMAN KATALOG -->
     <section id="page-catalog" class="page-section w-full pt-20 pb-28 max-w-7xl mx-auto px-4 gap-4">
         <div class="flex flex-col sm:flex-row gap-2">
             <input id="searchCatalogInput" oninput="renderCatalog()" class="flex-1 h-11 px-4 bg-surface-container-lowest rounded-xl text-sm focus:outline-none border border-surface-container-low" placeholder="Cari nama produk..." type="text"/>
-            <button onclick="openAddProductModal()" class="h-11 px-4 rounded-xl bg-primary text-on-primary text-xs font-bold flex items-center justify-center gap-2">
+            <button onclick="openAddProductModal()" class="h-11 px-4 rounded-xl bg-primary text-on-primary text-xs font-bold flex items-center justify-center gap-2 cursor-pointer">
                 <span class="material-symbols-outlined text-[18px]">add</span> Tambah Produk
             </button>
         </div>
 
         <div id="catalogList" class="bg-surface-container-lowest rounded-2xl shadow-sm border border-surface-container-low divide-y divide-surface-container-low">
-            <!-- Rendered by JS -->
+            <!-- Dinamis via JS -->
         </div>
     </section>
 
@@ -152,12 +152,12 @@
                 <input id="orderCustomerInput" class="w-full h-10 px-3 bg-surface rounded-xl text-xs border border-surface-container focus:outline-none" placeholder="Nama Pelanggan / Toko" required type="text"/>
                 <input id="orderItemsInput" class="w-full h-10 px-3 bg-surface rounded-xl text-xs border border-surface-container focus:outline-none" placeholder="Rincian Barang (cth: 10 Dus Paseo)" required type="text"/>
                 <input id="orderTotalInput" class="w-full h-10 px-3 bg-surface rounded-xl text-xs border border-surface-container focus:outline-none" placeholder="Total Tagihan (Rp)" required type="number"/>
-                <button type="submit" class="h-10 px-4 rounded-xl bg-primary text-on-primary text-xs font-semibold">Simpan Pesanan</button>
+                <button type="submit" class="h-10 px-4 rounded-xl bg-primary text-on-primary text-xs font-semibold cursor-pointer">Simpan Pesanan</button>
             </form>
         </div>
 
         <div id="ordersList" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <!-- Rendered by JS -->
+            <!-- Dinamis via JS -->
         </div>
     </section>
 
@@ -183,36 +183,35 @@
                 <span class="text-base text-emerald-800 font-mono">Rp 5.700.000</span>
             </div>
         </div>
-        <button onclick="window.print()" class="w-full mt-4 py-3 rounded-xl bg-primary text-on-primary font-semibold text-sm flex items-center justify-center gap-2 no-print">
+        <button onclick="window.print()" class="w-full mt-4 py-3 rounded-xl bg-primary text-on-primary font-semibold text-sm flex items-center justify-center gap-2 no-print cursor-pointer">
             <span class="material-symbols-outlined text-[20px]">picture_as_pdf</span> Cetak / Simpan PDF
         </button>
     </section>
 
-    <!-- BOTTOM NAVIGATION (Tampil jika sudah login) -->
+    <!-- GLOBAL BOTTOM NAVIGATION (Tampil setelah login) -->
     <nav id="mainNav" class="fixed bottom-0 w-full z-40 pb-safe bg-surface/90 backdrop-blur-xl shadow-md hidden">
         <div class="max-w-7xl mx-auto h-16 px-4 flex items-center justify-around text-xs">
-            <button onclick="navigateTo('dashboard')" class="nav-btn flex flex-col items-center gap-0.5 text-on-surface-variant" data-page="dashboard">
+            <button onclick="navigateTo('dashboard')" class="nav-btn flex flex-col items-center gap-0.5 text-on-surface-variant cursor-pointer" data-page="dashboard">
                 <span class="material-symbols-outlined text-[22px]">grid_view</span>
                 <span>Dashboard</span>
             </button>
-            <button onclick="navigateTo('catalog')" class="nav-btn flex flex-col items-center gap-0.5 text-on-surface-variant" data-page="catalog">
+            <button onclick="navigateTo('catalog')" class="nav-btn flex flex-col items-center gap-0.5 text-on-surface-variant cursor-pointer" data-page="catalog">
                 <span class="material-symbols-outlined text-[22px]">inventory_2</span>
                 <span>Katalog</span>
             </button>
-            <button onclick="navigateTo('orders')" class="nav-btn flex flex-col items-center gap-0.5 text-on-surface-variant" data-page="orders">
+            <button onclick="navigateTo('orders')" class="nav-btn flex flex-col items-center gap-0.5 text-on-surface-variant cursor-pointer" data-page="orders">
                 <span class="material-symbols-outlined text-[22px]">local_shipping</span>
                 <span>Orders</span>
             </button>
-            <button onclick="navigateTo('nota')" class="nav-btn flex flex-col items-center gap-0.5 text-on-surface-variant" data-page="nota">
+            <button onclick="navigateTo('nota')" class="nav-btn flex flex-col items-center gap-0.5 text-on-surface-variant cursor-pointer" data-page="nota">
                 <span class="material-symbols-outlined text-[22px]">receipt_long</span>
                 <span>Nota PDF</span>
             </button>
         </div>
     </nav>
 
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- SCRIPT LOGIC -->
     <script>
-        // Init state
         const defaultProducts = [
             { id: 1, name: 'See-U Jumbo Roll', brand: 'See-U', stock: 60, price: 325000, image: 'https://via.placeholder.com/100' },
             { id: 2, name: 'Nice Facial Tissue 900g', brand: 'Nice', stock: 15, price: 230000, image: 'https://via.placeholder.com/100' },
@@ -227,7 +226,6 @@
         let products = JSON.parse(localStorage.getItem('products')) || defaultProducts;
         let orders = JSON.parse(localStorage.getItem('orders')) || defaultOrders;
 
-        // Login Handler
         function handleLogin(e) {
             e.preventDefault();
             localStorage.setItem('is_logged_in', 'true');
@@ -255,10 +253,9 @@
             }
         }
 
-        // Navigation Router
         function navigateTo(pageId) {
             showSection('page-' + pageId);
-            document.getElementById('pageTitle').textContent = pageId.charAt(0).toUpperCase() + pageId.slice(1);
+            document.getElementById('headerTitle').textContent = pageId.charAt(0).toUpperCase() + pageId.slice(1);
 
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 if (btn.getAttribute('data-page') === pageId) {
@@ -279,7 +276,6 @@
             document.getElementById(sectionId).classList.add('active');
         }
 
-        // Catalog Methods
         function renderCatalog() {
             const query = document.getElementById('searchCatalogInput').value.toLowerCase();
             const list = document.getElementById('catalogList');
@@ -299,7 +295,7 @@
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="text-sm font-bold text-primary">Rp ${p.price.toLocaleString('id-ID')}</span>
-                            <button onclick="deleteProduct(${p.id})" class="p-1 text-error"><span class="material-symbols-outlined text-[20px]">delete</span></button>
+                            <button onclick="deleteProduct(${p.id})" class="p-1 text-error cursor-pointer"><span class="material-symbols-outlined text-[20px]">delete</span></button>
                         </div>
                     </div>
                 `;
@@ -327,7 +323,6 @@
             }
         }
 
-        // Orders Methods
         function renderOrders() {
             const list = document.getElementById('ordersList');
             list.innerHTML = '';
@@ -347,7 +342,7 @@
                         </div>
                         <div class="flex justify-between items-center pt-2 border-t border-surface-container-low">
                             <span class="text-sm font-bold text-primary">Rp ${parseInt(o.total).toLocaleString('id-ID')}</span>
-                            <button onclick="navigateTo('nota')" class="px-3 py-1.5 rounded-lg bg-surface-container text-xs font-semibold text-on-surface">Lihat Nota</button>
+                            <button onclick="navigateTo('nota')" class="px-3 py-1.5 rounded-lg bg-surface-container text-xs font-semibold text-on-surface cursor-pointer">Lihat Nota</button>
                         </div>
                     </div>
                 `;
@@ -370,7 +365,6 @@
             renderOrders();
         }
 
-        // On Load
         document.addEventListener('DOMContentLoaded', checkAuth);
     </script>
 </body>
